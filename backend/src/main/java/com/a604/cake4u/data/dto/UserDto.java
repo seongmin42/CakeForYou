@@ -1,6 +1,6 @@
 package com.a604.cake4u.data.dto;
 
-import com.ssafy.realcart.data.entity.auth.ProviderType;
+import com.a604.cake4u.data.entity.auth.ProviderType;
 import lombok.*;
 
 @Getter

@@ -1,9 +1,9 @@
 package com.a604.cake4u.data.dao;
 
-import com.ssafy.realcart.data.dao.inter.IUserDAO;
-import com.ssafy.realcart.data.entity.User;
-import com.ssafy.realcart.data.repository.IUserRepository;
-import com.ssafy.realcart.exception.NotUniqueException;
+import com.a604.cake4u.data.dao.inter.IBuyerDAO;
+import com.a604.cake4u.data.entity.Buyer;
+import com.a604.cake4u.data.repository.IBuyerRepository;
+import com.a604.cake4u.exception.NotUniqueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,32 +11,32 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
-public class UserDAO implements IUserDAO {
+public class BuyerDAO implements IBuyerDAO {
 
-    private IUserRepository userRepository;
-    private final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class);
+    private IBuyerRepository iBuyerRepository;
+    private final Logger LOGGER = LoggerFactory.getLogger(BuyerDAO.class);
 
 
     @Autowired
-    public UserDAO(IUserRepository userRepository) {
-        this.userRepository = userRepository;
+    public BuyerDAO(IBuyerRepository userRepository) {
+        this.iBuyerRepository = userRepository;
     }
 
     @Override
-    public boolean createUser(User user) {
+    public boolean createUser(Buyer buyer) {
         LOGGER.info("createUser 메서드가 userDAO에서 호출되었습니다.");
         try {
-            if(userRepository.findByNickname(user.getNickname()) != null){
+            if(iBuyerRepository.findByNickname(buyer.getNickname()) != null){
                 LOGGER.info("중복된 닉네임이 있습니다.");
                 throw new NotUniqueException("중복된 닉네임이 있습니다.");
 
             };
-            if(userRepository.findByEmail(user.getEmail()) != null){
+            if(iBuyerRepository.findByEmail(buyer.getEmail()) != null){
                 LOGGER.info("중복된 이메일이 있습니다.");
                 throw new NotUniqueException("중복된 이메일이 있습니다.");
             }
-            userRepository.save(user);
-            LOGGER.info(user.getEmail() + "  회원가입 성공");
+            iBuyerRepository.save(buyer);
+            LOGGER.info(buyer.getEmail() + "  회원가입 성공");
             return true;
         }catch (Exception e){
             LOGGER.debug(e.getMessage());
@@ -46,26 +46,26 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public User getUser(String email) {
+    public Buyer getUser(String email) {
         LOGGER.info("getUser 메서드가 userDAO에서 호출되었습니다.");
-        return userRepository.findByEmail(email);
+        return iBuyerRepository.findByEmail(email);
     }
 
     @Override
-    public User checkNickname(String nickname) {
+    public Buyer checkNickname(String nickname) {
         LOGGER.info("checkNickname 메서드가 userDAO에서 호출되었습니다.");
-        return userRepository.findByNickname(nickname);
+        return iBuyerRepository.findByNickname(nickname);
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Buyer> getAllUsers() {
         LOGGER.info("getAllUsers 메서드가 userDAO에서 호출되었습니다.");
-        return (List<User>) userRepository.findAll();
+        return (List<Buyer>) iBuyerRepository.findAll();
     }
 
     @Override
-    public User updateUser(User user) {
-        return userRepository.save(user);
+    public Buyer updateUser(Buyer buyer) {
+        return iBuyerRepository.save(buyer);
     }
 
     @Override
@@ -80,10 +80,10 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean verifyEmail(String email, String salt) {
-        User selectedUser = userRepository.findByEmail(email);
+        Buyer selectedUser = iBuyerRepository.findByEmail(email);
         if(selectedUser != null && salt.equals(selectedUser.getEmailSalt())){
             selectedUser.setIsBan((byte)1);
-            userRepository.save(selectedUser);
+            iBuyerRepository.save(selectedUser);
             return true;
         }
         return false;
