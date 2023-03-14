@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Nanum GarMaesGeur';
     src: url('./fonts/Nanum GarMaesGeur.ttf') format('truetype');
+  }
 `;
 
 export default GlobalStyle;
