@@ -28,7 +28,7 @@ public class PortfolioService implements PortfolioRepositoryCustom{
     private final SellerRepository sellerRepository;
     private final JPAQueryFactory queryFactory;
 
-//  querydsl=========================================================================
+//  케이크 조건들을 보고 해당하는 포트폴리오만 가져오기 querydsl사용
     @Override
     public List<PortfolioResponseDto> findPortfolioCakeFilter(CakeFilter cakeFilter) {
 
@@ -70,8 +70,6 @@ public class PortfolioService implements PortfolioRepositoryCustom{
         }
         return returnList;
     }
-
-//querydsl===============================================================================
 
     //PortfolioFileDto 생성 필요 uri, name, type만 프론트에서 받으면 될듯
     //public void uploadPortfolio(PortfolioSaveDto portfolioSaveDto, PortfolioFileDto portfolioFileDto
