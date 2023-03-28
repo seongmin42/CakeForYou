@@ -8,6 +8,9 @@ const RowContainer = styled.div`
   align-items: ${(props) => props.align || "center"};
   background-color: ${(props) => props.background || "transparent"};
   box-shadow: ${(props) => props.boxShadow || "none"};
+  border: ${(props) => props.border || "none"};
+  border-radius: ${(props) => props.borderRadius || "0"};
+  border-color: ${(props) => props.borderColor || "transparent"};
 `;
 
 export default RowContainer;
