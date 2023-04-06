@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import html2canvas from "html2canvas";
 import { Stage, Layer, Rect, Text } from "react-konva";
+import { SvgIcon } from "@mui/material";
 import CustomImage from "./CustomImage";
 import SidebarDiy from "./components/SidebarDiy";
 import Button1 from "./components/button/Button1";
@@ -25,6 +26,14 @@ const BtnContainer = styled.div`
   width: 100%;
   z-index: 1;
 `;
+
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 
 function CakeDiy() {
   const navigate = useNavigate();
@@ -204,6 +213,11 @@ function CakeDiy() {
         }}
       />
       <BtnContainer>
+        <Link to="/main" style={{ textDecoration: "none", color: "inherit" }}>
+          <Button1 background="none" style={{ marginRight: "10px" }}>
+            <HomeIcon color="primary" />
+          </Button1>
+        </Link>
         <Button1
           background="rgb(101 141 198)"
           type="button"
